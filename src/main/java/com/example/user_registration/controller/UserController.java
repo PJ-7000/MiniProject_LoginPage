@@ -12,6 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+//used to generate a constructor that includes all final fields of a class as parameters .
+//Lombok annotation
 @RequiredArgsConstructor
 public class UserController {
 
@@ -26,6 +28,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDetails> getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
+                //ifPresent
                 .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
