@@ -1,4 +1,4 @@
-package exception;
+package com.example.user_registration.exception;
 
 import com.example.user_registration.model.CustomErrorResponse;
 import org.slf4j.Logger;

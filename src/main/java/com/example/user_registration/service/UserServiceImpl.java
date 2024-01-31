@@ -2,8 +2,8 @@ package com.example.user_registration.service;
 
 import com.example.user_registration.entity.UserDetails;
 import com.example.user_registration.repository.UserRepository;
-import exception.UserAlreadyPresentException;
-import exception.UserNotFoundException;
+import com.example.user_registration.exception.UserAlreadyPresentException;
+import com.example.user_registration.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

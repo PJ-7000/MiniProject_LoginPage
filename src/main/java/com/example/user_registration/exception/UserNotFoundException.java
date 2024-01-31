@@ -1,4 +1,4 @@
-package exception;
+package com.example.user_registration.exception;
 
 public class UserNotFoundException extends RuntimeException {
 
