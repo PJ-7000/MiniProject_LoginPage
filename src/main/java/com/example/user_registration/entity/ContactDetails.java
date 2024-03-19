@@ -15,14 +15,17 @@ public class ContactDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String email;
 
     @Column(nullable = false)
     private String firstname;
 
+
+
     @Column(nullable = false)
     private String phoneNumber;
+
+    @Column(nullable = false)
+    private String email;
 
     @OneToOne(mappedBy = "contactDetails", cascade = CascadeType.ALL)
     private UserDetails userDetails;
