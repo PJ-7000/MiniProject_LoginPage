@@ -71,4 +71,6 @@ public class UserServiceImplTest {
 
         assertThrows(UserAlreadyPresentException.class, () -> userService.registerUser(userModel));
     }
+
+
 }

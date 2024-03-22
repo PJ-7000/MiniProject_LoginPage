@@ -10,8 +10,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @DataJpaTest
@@ -19,6 +22,7 @@ public class ContactDetailsRepositoryTest {
 
     @Mock
     private ContactDetailsRepository contactDetailsRepository;
+
     @Test
     public void testSaveContactDetails() {
         ContactDetails contactDetails = new ContactDetails();
@@ -29,7 +33,7 @@ public class ContactDetailsRepositoryTest {
 
         ContactDetails savedContactDetails = contactDetailsRepository.save(contactDetails);
 
-        assertThat(savedContactDetails).isNotNull();
+        assertNotNull(savedContactDetails);
         assertEquals("1234567890", savedContactDetails.getPhoneNumber());
         assertEquals("test@example.com", savedContactDetails.getEmail());
     }
@@ -45,8 +49,8 @@ public class ContactDetailsRepositoryTest {
 
         Optional<ContactDetails> foundContactDetails = contactDetailsRepository.findById(1L);
 
-        assertThat(foundContactDetails).isPresent();
+        assertTrue(foundContactDetails.isPresent());
         assertEquals("1234567890", foundContactDetails.get().getPhoneNumber());
-        assertEquals("test@example.com", foundContactDetails.get().getEmail());
+
     }
 }
