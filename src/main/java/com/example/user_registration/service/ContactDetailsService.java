@@ -32,6 +32,7 @@ public class ContactDetailsService {
         return contactDetailsRepository.save(contactDetails);
     }
 
+
     public ContactDetails updateContactDetails(Long id, ContactDetails updatedContactDetails) {
         Optional<ContactDetails> existingContactDetailsOptional = contactDetailsRepository.findById(id);
 
@@ -49,7 +50,8 @@ public class ContactDetailsService {
         }
     }
 
-    public void deleteContactDetails(Long id) {
+    public boolean deleteContactDetails(Long id) {
         contactDetailsRepository.deleteById(id);
+        return false;
     }
 }

@@ -1,10 +1,8 @@
 package com.example.user_registration.entity;
 
-import jakarta.persistence.*;
-
 import lombok.Data;
 
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "contact_details")
@@ -16,19 +14,14 @@ public class ContactDetails {
     private Long id;
 
     @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = false)
     private String firstname;
 
     @Column(nullable = false)
     private String phoneNumber;
 
+    @Column(nullable = false)
+    private String email;
+
     @OneToOne(mappedBy = "contactDetails", cascade = CascadeType.ALL)
     private UserDetails userDetails;
 }
-
-
-
-
-
