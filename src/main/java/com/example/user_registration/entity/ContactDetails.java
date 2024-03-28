@@ -1,10 +1,8 @@
 package com.example.user_registration.entity;
 
-import jakarta.persistence.*;
-
 import lombok.Data;
 
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "contact_details")
@@ -15,11 +13,8 @@ public class ContactDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(nullable = false)
     private String firstname;
-
-
 
     @Column(nullable = false)
     private String phoneNumber;
@@ -30,8 +25,3 @@ public class ContactDetails {
     @OneToOne(mappedBy = "contactDetails", cascade = CascadeType.ALL)
     private UserDetails userDetails;
 }
-
-
-
-
-

@@ -1,5 +1,6 @@
 package com.example.user_registration.service;
 
+import com.example.user_registration.entity.UserDetails;
 import com.example.user_registration.exception.UserAlreadyPresentException;
 import com.example.user_registration.model.UserModel;
 import com.example.user_registration.repository.UserRepository;
@@ -14,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
@@ -27,10 +29,10 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetAllUsers() {
-        List<UserModel> userList = new ArrayList<>();
+        List<UserDetails> userList = new ArrayList<>();
         when(userRepository.findAll()).thenReturn(userList);
 
-        List<UserModel> result = userService.getAllUsers();
+        List<UserDetails> result = userService.getAllUsers();
 
         assertEquals(userList, result);
     }
@@ -38,11 +40,11 @@ public class UserServiceImplTest {
     @Test
     public void testGetUserById() {
         Long userId = 1L;
-        UserModel user = new UserModel();
+        UserDetails user = new UserDetails();
         user.setId(userId);
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
-        Optional<UserModel> result = userService.getUserById(userId);
+        Optional<UserDetails> result = userService.getUserById(userId);
 
         assertTrue(result.isPresent());
         assertEquals(user, result.get());
@@ -50,27 +52,25 @@ public class UserServiceImplTest {
 
     @Test
     public void testRegisterUser() {
-        UserModel userModel = new UserModel();
+        UserDetails userModel = new UserDetails();
         userModel.setUsername("testuser");
         userModel.setPassword("password");
 
         when(userRepository.existsByUsername(userModel.getUsername())).thenReturn(false);
-        when(userRepository.save(userModel)).thenReturn(userModel);
+        when(userRepository.save(any())).thenReturn(userModel);
 
-        UserModel result = userService.registerUser(userModel);
+        UserDetails result = userService.registerUser(userModel);
 
         assertEquals(userModel, result);
     }
 
     @Test
     public void testRegisterUserWithExistingUsername() {
-        UserModel userModel = new UserModel();
+        UserDetails userModel = new UserDetails();
         userModel.setUsername("existinguser");
 
         when(userRepository.existsByUsername(userModel.getUsername())).thenReturn(true);
 
         assertThrows(UserAlreadyPresentException.class, () -> userService.registerUser(userModel));
     }
-
-
 }
